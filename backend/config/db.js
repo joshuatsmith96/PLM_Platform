@@ -1,14 +1,14 @@
-const { Pool } = require("pg"); // or 'mysql2', etc.
+const { Pool } = require("pg");
+require("dotenv").config();
 
 const pool = new Pool({
-  user: "your_user",
-  host: "localhost",
-  database: "your_project_db",
-  password: "your_password",
-  port: 5432, // Default PostgreSQL port
+  user: process.env.DBUSER,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.DBPASSWORD,
+  port: 5433,
 });
 
-// A simple function to execute queries
 const query = (text, params) => pool.query(text, params);
 
 module.exports = {
