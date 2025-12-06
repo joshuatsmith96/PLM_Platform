@@ -93,8 +93,30 @@ const createProject = async (projectData) => {
   }
 };
 
+const deleteProject = async (projectId) => {
+  try {
+    const deleteDetailsText = `
+      DELETE FROM PROJECT_DETAILS
+      WHERE project_id = $1;
+    `;
+    await db.query(deleteDetailsText, [projectId]);
+
+    const deleteProjectText = `
+      DELETE FROM PROJECT
+      WHERE project_id = $1
+      RETURNING project_id;
+    `;
+    const result = await db.query(deleteProjectText, [projectId]);
+    return result.rowCount;
+  } catch (error) {
+    console.error(`Error deleting project with ID ${projectId}:`, error);
+    throw new Error("Could not execute multi-step delete process.");
+  }
+};
+
 module.exports = {
   getAllProjects,
   getProjectById,
   createProject,
+  deleteProject,
 };
