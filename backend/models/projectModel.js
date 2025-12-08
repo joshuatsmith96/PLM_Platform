@@ -96,7 +96,7 @@ const createProject = async (projectData) => {
 const deleteProject = async (projectId) => {
   try {
     const deleteDetailsText = `
-      DELETE FROM PROJECT_DETAILS
+      DELETE FROM STAGE_DETAILS
       WHERE project_id = $1;
     `;
     await db.query(deleteDetailsText, [projectId]);
