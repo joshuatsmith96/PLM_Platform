@@ -37,17 +37,17 @@ const updateStageDetail = async (req, res) => {
   const {
     project_stage_status,
     project_stage_notes,
-    project_stage_attachment_link,
+    project_stage_attachment_links,
   } = req.body;
 
   if (
     !project_stage_status &&
     !project_stage_notes &&
-    !project_stage_attachment_link
+    !project_stage_attachment_links
   ) {
     return res.status(400).json({
       message:
-        "At least one field must be provided for update (project_stage_status, project_stage_notes, or project_stage_attachment_link)",
+        "At least one field must be provided for update (project_stage_status, project_stage_notes, or project_stage_attachment_links)",
     });
   }
 
