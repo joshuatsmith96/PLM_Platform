@@ -9,8 +9,8 @@ SELECT
     sm.stage_name AS current_stage_name, 
     p.project_critical_status,
     p.project_next_required_action,
-    sd.project_stage_notes,
     sd.project_stage_status,
+    sd.project_stage_notes,
     sd.project_stage_attachment_link
 FROM 
     PROJECT p
