@@ -9,15 +9,15 @@ SELECT
     sm.stage_name AS current_stage_name, 
     p.project_critical_status,
     p.project_next_required_action,
-    pd.project_stage_notes,
-    pd.project_stage_status
+    sd.project_stage_notes,
+    sd.project_stage_status
 FROM 
     PROJECT p
 INNER JOIN 
     STAGE_MASTER sm ON p.project_current_stage = sm.stage_id
 LEFT JOIN 
-    PROJECT_DETAILS pd ON p.project_id = pd.project_id 
-                        AND p.project_current_stage = pd.stage_id
+    STAGE_DETAILS sd ON p.project_id = sd.project_id 
+                        AND p.project_current_stage = sd.stage_id
 `;
 
 const getAllProjects = async () => {
