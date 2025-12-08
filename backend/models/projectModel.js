@@ -57,7 +57,7 @@ const createProject = async (projectData) => {
     project_next_required_action,
   } = projectData;
 
-  const text = `
+  const projectText = `
     INSERT INTO PROJECT (
       project_id, project_name, project_creation_date, project_team_lead, 
       project_lead_department, project_poc_email, project_poc_phone, 
@@ -68,7 +68,7 @@ const createProject = async (projectData) => {
     RETURNING *;
   `;
 
-  const values = [
+  const projectValues = [
     project_id,
     project_name,
     project_creation_date,
@@ -82,9 +82,30 @@ const createProject = async (projectData) => {
     project_next_required_action,
   ];
 
+  const stageDetailText = `
+    INSERT INTO STAGE_DETAILS (
+      stage_detail_id, project_id, stage_id, project_stage_status, 
+      project_stage_notes, project_stage_attachment_link, timestamp
+    )
+    VALUES ($1, $2, $3, $4, $5, $6, NOW())
+    RETURNING *;
+  `;
+
+  const stageDetailValues = [
+    `${project_id}_S01`,
+    project_id,
+    project_current_stage,
+    "Started",
+    null,
+    null,
+  ];
+
   try {
-    const result = await db.query(text, values);
-    return result.rows[0];
+    const projectResult = await db.query(projectText, projectValues);
+
+    await db.query(stageDetailText, stageDetailValues);
+
+    return projectResult.rows[0];
   } catch (error) {
     console.error("Error creating new project:", error);
     throw new Error(
