@@ -46,16 +46,16 @@ const createProject = async (projectData) => {
   const {
     project_id,
     project_name,
-    project_creation_date,
     project_team_lead,
     project_lead_department,
     project_poc_email,
     project_poc_phone,
-    project_current_stage,
     project_critical_status,
     project_lifecycle_type,
     project_next_required_action,
   } = projectData;
+
+  const project_current_stage = "S01_INIT";
 
   const projectText = `
     INSERT INTO PROJECT (
@@ -64,14 +64,13 @@ const createProject = async (projectData) => {
       project_current_stage, project_critical_status, project_lifecycle_type, 
       project_next_required_action
     )
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+    VALUES ($1, $2, NOW(), $3, $4, $5, $6, $7, $8, $9, $10)
     RETURNING *;
   `;
 
   const projectValues = [
     project_id,
     project_name,
-    project_creation_date,
     project_team_lead,
     project_lead_department,
     project_poc_email,
@@ -97,7 +96,7 @@ const createProject = async (projectData) => {
     project_current_stage,
     "Started",
     null,
-    null,
+    [],
   ];
 
   try {

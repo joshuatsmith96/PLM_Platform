@@ -45,12 +45,7 @@ const getProjectById = async (req, res) => {
 };
 
 const createProject = async (req, res) => {
-  const requiredFields = [
-    "project_id",
-    "project_name",
-    "project_creation_date",
-    "project_current_stage",
-  ];
+  const requiredFields = ["project_id", "project_name"];
   for (const field of requiredFields) {
     if (!req.body[field]) {
       return res
