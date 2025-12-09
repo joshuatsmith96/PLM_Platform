@@ -101,17 +101,17 @@ const ProjectDetails = () => {
         <DetailSection
           title="Project Details"
           data={[
-            { title: "Project ID", text: "#PRJ-2023-001" },
+            { title: "Project ID", text: project?.project_id },
             {
               title: "Next Required Action",
-              text: "Review Supplier Design Proposal",
+              text: project?.project_next_required_action,
             },
-            { title: "Current Stage", text: "Planning" },
-            { title: "Date Created", text: "2025-08-01" },
-            { title: "Team Lead", text: "Josh Smith" },
-            { title: "Lead Department", text: "Marketing" },
-            { title: "Contact Email", text: "josh.smith@email.com" },
-            { title: "Contact Phone", text: "123-456-7890" },
+            { title: "Current Stage", text: project?.current_stage_name },
+            { title: "Date Created", text: project?.project_creation_date },
+            { title: "Team Lead", text: project?.project_team_lead },
+            { title: "Lead Department", text: "NEED TO ADD THIS" },
+            { title: "Contact Email", text: "NEED TO ADD THIS" },
+            { title: "Contact Phone", text: "NEED TO ADD THIS" },
           ]}
         />
       </Section>
@@ -130,13 +130,13 @@ const ProjectDetails = () => {
             <DetailSection
               title="Supplier Details"
               data={[
-                { title: "Company", text: "Company A" },
-                { title: "Point of Contact", text: "Bob Johnson" },
-                { title: "Contact Email", text: "bob.johnson@companyA.com" },
-                { title: "Contact Phone", text: "+1-763-123-4567" },
+                { title: "Company", text: "NEED TO ADD THIS" },
+                { title: "Point of Contact", text: "NEED TO ADD THIS" },
+                { title: "Contact Email", text: "NEED TO ADD THIS" },
+                { title: "Contact Phone", text: "NEED TO ADD THIS" },
                 {
                   title: "Outstanding Requests",
-                  text: "Input on notes required",
+                  text: "NEED TO ADD THIS",
                 },
               ]}
             />
@@ -145,13 +145,13 @@ const ProjectDetails = () => {
             <DetailSection
               title="Distributor Details"
               data={[
-                { title: "Company", text: "Distributor A" },
-                { title: "Point of Contact", text: "Bill Smith" },
-                { title: "Contact Email", text: "bill.smith@distributorA.com" },
-                { title: "Contact Phone", text: "+1-763-456-7890" },
+                { title: "Company", text: "NEED TO ADD THIS" },
+                { title: "Point of Contact", text: "NEED TO ADD THIS" },
+                { title: "Contact Email", text: "NEED TO ADD THIS" },
+                { title: "Contact Phone", text: "NEED TO ADD THIS" },
                 {
                   title: "Outstanding Requests",
-                  text: "Input on images required",
+                  text: "NEED TO ADD THIS",
                 },
               ]}
             />

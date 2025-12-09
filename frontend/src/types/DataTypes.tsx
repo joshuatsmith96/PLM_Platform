@@ -1,8 +1,3 @@
-export type DetailEntryType = {
-  title: string;
-  text: string;
-};
-
 export type Project = {
   project_id: string;
   project_name: string;
@@ -15,6 +10,11 @@ export type Project = {
   project_stage_notes: string | null;
   project_stage_status: string | null;
   project_stage_attachment_links: string[] | null;
+};
+
+export type DetailEntryType = {
+  title: string;
+  text: string | undefined | null;
 };
 
 export type DetailSectionType = {
