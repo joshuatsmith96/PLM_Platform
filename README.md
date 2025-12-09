@@ -178,27 +178,17 @@ Historical record of stage transitions and notes.
 
 ### Projects
 
-#### Get All Projects (with Pagination)
+#### Get All Projects
 ```
 GET /api/v1/projects?page=1&limit=10
 ```
-
-**Query Parameters:**
-- `page` (optional): Page number (default: 1)
-- `limit` (optional): Items per page (default: 10)
 
 **Response:**
 ```json
 {
   "message": "Projects retrieved successfully",
   "count": 10,
-  "data": [...],
-  "pagination": {
-    "currentPage": 1,
-    "pageSize": 10,
-    "totalCount": 45,
-    "totalPages": 5
-  }
+  "data": [...]
 }
 ```
 
@@ -215,9 +205,7 @@ POST /api/v1/projects
 **Required Fields:**
 - `project_id`
 - `project_name`
-
-**Optional Fields:**
-- `project_team_lead`
+- - `project_team_lead`
 - `project_lead_department`
 - `project_poc_email`
 - `project_poc_phone`
