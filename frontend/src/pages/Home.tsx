@@ -1,10 +1,11 @@
-import { Stack, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import PageContainer from "../components/PageContainer";
 
 const Home = () => {
   return (
-    <Stack>
+    <PageContainer>
       <Typography variant="h4">Home Page</Typography>
-    </Stack>
+    </PageContainer>
   );
 };
 
