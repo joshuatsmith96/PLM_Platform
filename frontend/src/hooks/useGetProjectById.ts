@@ -8,7 +8,7 @@ interface UseGetProjectByIdReturn {
   refetch: () => Promise<void>;
 }
 
-const useGetProjectById = (id: string | number): UseGetProjectByIdReturn => {
+const useGetProjectById = (id: string | undefined): UseGetProjectByIdReturn => {
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
