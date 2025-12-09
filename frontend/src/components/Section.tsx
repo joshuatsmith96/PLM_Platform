@@ -8,7 +8,7 @@ type SectionType = {
 
 const Section = ({ children }: SectionType) => {
   return (
-    <Stack sx={{ borderBottom: "solid thin rgba(174, 174, 174, 0.6)" }}>
+    <Stack sx={{ borderBottom: "solid thin rgba(174, 174, 174, 0.6)", py: 3 }}>
       <PageContainer>{children}</PageContainer>
     </Stack>
   );
