@@ -14,22 +14,43 @@ import {
   TableHead,
   Paper,
   Stack,
+  CircularProgress,
+  Alert,
 } from "@mui/material";
 import { Search, Add } from "@mui/icons-material";
-import { testData } from "./testData";
+import useProjects from "../../hooks/useProjects";
 import TRow from "./Parts/TRow";
 import TableColumns from "./Parts/TableColumns";
-import useProjects from "../../hooks/useProjects";
-
-const projectsData = testData;
 
 export default function OverviewTable() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [criticalStatusFilter, setCriticalStatusFilter] = useState("");
-  const [lifecycleFilter, setLifecycleFilter] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [criticalStatusFilter, setCriticalStatusFilter] = useState<string>("");
+  const [lifecycleFilter, setLifecycleFilter] = useState<string>("");
 
-  const { projects } = useProjects();
-  console.log(projects);
+  const { projects, loading, error } = useProjects();
+
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box sx={{ p: 3 }}>
+        <Alert severity="error">Error loading projects: {error}</Alert>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -164,9 +185,24 @@ export default function OverviewTable() {
             <TableColumns />
           </TableHead>
           <TableBody>
-            {projectsData.map((project, index) => (
-              <TRow project={project} index={index} />
-            ))}
+            {projects.length > 0 ? (
+              projects.map((project, index) => (
+                <TRow
+                  key={project.project_id}
+                  project={project}
+                  index={index}
+                />
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan={7}
+                  style={{ textAlign: "center", padding: "20px" }}
+                >
+                  No projects found
+                </td>
+              </tr>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
