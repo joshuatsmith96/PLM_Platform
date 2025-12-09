@@ -86,7 +86,7 @@ const createProject = async (projectData) => {
   const stageDetailText = `
     INSERT INTO STAGE_DETAILS (
       stage_detail_id, project_id, stage_id, project_stage_status, 
-      project_stage_notes, project_stage_attachment_link, timestamp
+      project_stage_notes, project_stage_attachment_links, timestamp
     )
     VALUES ($1, $2, $3, $4, $5, $6, NOW())
     RETURNING *;
