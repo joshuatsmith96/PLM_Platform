@@ -28,8 +28,8 @@ export default function OverviewTable() {
   const [criticalStatusFilter, setCriticalStatusFilter] = useState("");
   const [lifecycleFilter, setLifecycleFilter] = useState("");
 
-  const data = useProjects();
-  console.log(data);
+  const { projects } = useProjects();
+  console.log(projects);
 
   return (
     <Box
