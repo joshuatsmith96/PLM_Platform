@@ -252,7 +252,7 @@ export default function OverviewTable() {
             ) : (
               <tr>
                 <td colSpan={7} style={{ textAlign: "center", padding: 20 }}>
-                  No projects found
+                  <Typography>No projects found</Typography>
                 </td>
               </tr>
             )}
