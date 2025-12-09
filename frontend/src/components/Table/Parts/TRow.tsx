@@ -30,7 +30,11 @@ const TRow = ({ project, index }: TRowType) => {
     >
       <TableCell sx={{ color: "#666" }}>{project.project_id}</TableCell>
       <TableCell>
-        <Typography sx={{ color: "#2196f3", fontWeight: 500 }}>
+        <Typography
+          sx={{ color: "#2196f3", fontWeight: 500 }}
+          component={"a"}
+          href={`/project/${project.project_id}`}
+        >
           {project.project_name}
         </Typography>
       </TableCell>
