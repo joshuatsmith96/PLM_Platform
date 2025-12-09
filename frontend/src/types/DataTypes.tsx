@@ -6,6 +6,9 @@ export type Project = {
   project_lifecycle_type: string;
   current_stage_name: string;
   project_critical_status: string | null;
+  project_lead_department: string | null;
+  project_poc_phone: string | null;
+  project_poc_email: string | null;
   project_next_required_action: string | null;
   project_stage_notes: string | null;
   project_stage_status: string | null;

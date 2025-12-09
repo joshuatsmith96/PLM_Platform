@@ -109,9 +109,12 @@ const ProjectDetails = () => {
             { title: "Current Stage", text: project?.current_stage_name },
             { title: "Date Created", text: project?.project_creation_date },
             { title: "Team Lead", text: project?.project_team_lead },
-            { title: "Lead Department", text: "NEED TO ADD THIS" },
-            { title: "Contact Email", text: "NEED TO ADD THIS" },
-            { title: "Contact Phone", text: "NEED TO ADD THIS" },
+            {
+              title: "Lead Department",
+              text: project?.project_lead_department,
+            },
+            { title: "Contact Email", text: project?.project_poc_email },
+            { title: "Contact Phone", text: project?.project_poc_phone },
           ]}
         />
       </Section>
@@ -130,13 +133,13 @@ const ProjectDetails = () => {
             <DetailSection
               title="Supplier Details"
               data={[
-                { title: "Company", text: "NEED TO ADD THIS" },
-                { title: "Point of Contact", text: "NEED TO ADD THIS" },
-                { title: "Contact Email", text: "NEED TO ADD THIS" },
-                { title: "Contact Phone", text: "NEED TO ADD THIS" },
+                { title: "Company", text: "Supplier A" },
+                { title: "Point of Contact", text: "Bob Johnson" },
+                { title: "Contact Email", text: "bob.johnson@supplierA.com" },
+                { title: "Contact Phone", text: "+1-763-123-4567" },
                 {
                   title: "Outstanding Requests",
-                  text: "NEED TO ADD THIS",
+                  text: "Input on notes required",
                 },
               ]}
             />
@@ -145,13 +148,13 @@ const ProjectDetails = () => {
             <DetailSection
               title="Distributor Details"
               data={[
-                { title: "Company", text: "NEED TO ADD THIS" },
-                { title: "Point of Contact", text: "NEED TO ADD THIS" },
-                { title: "Contact Email", text: "NEED TO ADD THIS" },
-                { title: "Contact Phone", text: "NEED TO ADD THIS" },
+                { title: "Company", text: "Distributor A" },
+                { title: "Point of Contact", text: "Bill Smith" },
+                { title: "Contact Email", text: "bill.smith@distributorA.com" },
+                { title: "Contact Phone", text: "+1-763-456-7890" },
                 {
                   title: "Outstanding Requests",
-                  text: "NEED TO ADD THIS",
+                  text: "Input on images required",
                 },
               ]}
             />
