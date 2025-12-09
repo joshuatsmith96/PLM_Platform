@@ -8,7 +8,7 @@ const TableColumns = () => {
         Project Name
       </TableCell>
       <TableCell sx={{ fontWeight: 600, color: "#666" }}>
-        Critical Status
+        Lifecycle Type
       </TableCell>
       <TableCell sx={{ fontWeight: 600, color: "#666" }}>
         Critical Status
