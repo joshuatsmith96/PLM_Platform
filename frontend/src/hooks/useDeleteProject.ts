@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 interface UseDeleteProjectReturn {
-  deleteProject: (id: string) => Promise<void>;
+  deleteProject: (id: string | undefined) => Promise<void>;
   loading: boolean;
   error: string | null;
   success: boolean;
@@ -14,7 +14,7 @@ const useDeleteProject = (): UseDeleteProjectReturn => {
 
   const url = import.meta.env.VITE_API_URL;
 
-  const deleteProject = async (id: string): Promise<void> => {
+  const deleteProject = async (id: string | undefined): Promise<void> => {
     if (!id) {
       setError("No project ID provided");
       return;

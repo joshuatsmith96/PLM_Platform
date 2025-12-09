@@ -4,7 +4,7 @@ import type { Project } from "../types/DataTypes";
 interface UseProjectsReturn {
   projects: Project[];
   loading: boolean;
-  error: string | null;
+  error: string | null | undefined;
   refetch: () => Promise<void>;
 }
 
