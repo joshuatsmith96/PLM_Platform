@@ -1,10 +1,10 @@
-import { Typography } from "@mui/material";
 import PageContainer from "../components/PageContainer";
+import OverviewTable from "../components/Table/Table";
 
 const Home = () => {
   return (
     <PageContainer>
-      <Typography variant="h4">Home Page</Typography>
+      <OverviewTable />
     </PageContainer>
   );
 };
