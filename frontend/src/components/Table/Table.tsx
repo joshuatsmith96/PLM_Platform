@@ -98,6 +98,7 @@ export default function OverviewTable() {
 
       await refetch(); // Refresh table
       handleCloseDialog();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setSubmitError(err.message || "Unknown error");
     } finally {
