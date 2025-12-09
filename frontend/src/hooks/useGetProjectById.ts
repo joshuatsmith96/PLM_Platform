@@ -8,7 +8,9 @@ interface UseGetProjectByIdReturn {
   refetch: () => Promise<void>;
 }
 
-const useGetProjectById = (id: string | undefined): UseGetProjectByIdReturn => {
+const useGetProjectById = (
+  id: string | number | undefined
+): UseGetProjectByIdReturn => {
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -47,7 +49,7 @@ const useGetProjectById = (id: string | undefined): UseGetProjectByIdReturn => {
 
   useEffect(() => {
     fetchProject();
-  }, [id]); // re-run if the ID changes
+  }, [id]);
 
   return { project, loading, error, refetch: fetchProject };
 };
