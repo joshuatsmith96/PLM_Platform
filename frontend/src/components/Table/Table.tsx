@@ -19,6 +19,7 @@ import { Search, Add } from "@mui/icons-material";
 import { testData } from "./testData";
 import TRow from "./Parts/TRow";
 import TableColumns from "./Parts/TableColumns";
+import useProjects from "../../hooks/useProjects";
 
 const projectsData = testData;
 
@@ -26,6 +27,9 @@ export default function OverviewTable() {
   const [searchTerm, setSearchTerm] = useState("");
   const [criticalStatusFilter, setCriticalStatusFilter] = useState("");
   const [lifecycleFilter, setLifecycleFilter] = useState("");
+
+  const data = useProjects();
+  console.log(data);
 
   return (
     <Box
