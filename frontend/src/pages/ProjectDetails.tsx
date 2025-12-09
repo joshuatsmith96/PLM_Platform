@@ -17,6 +17,7 @@ import DetailSection from "../components/DetailSection";
 import useDeleteProject from "../hooks/useDeleteProject";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { User } from "../dummyUser";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -77,23 +78,25 @@ const ProjectDetails = () => {
               Back to Dashboard
             </Box>
           </Button>
-          <Button
-            variant="contained"
-            onClick={handleOpenConfirm}
-            sx={{
-              fontSize: 12,
-              width: "fit-content",
-              gap: 2,
-              bgcolor: "rgba(227, 45, 0, 1)",
-            }}
-          >
-            <Tooltip title="Delete Project">
-              <DeleteOutlineIcon />
-            </Tooltip>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              Delete Project
-            </Box>
-          </Button>
+          {User.role === "CSCSAdmin" ? (
+            <Button
+              variant="contained"
+              onClick={handleOpenConfirm}
+              sx={{
+                fontSize: 12,
+                width: "fit-content",
+                gap: 2,
+                bgcolor: "rgba(227, 45, 0, 1)",
+              }}
+            >
+              <Tooltip title="Delete Project">
+                <DeleteOutlineIcon />
+              </Tooltip>
+              <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                Delete Project
+              </Box>
+            </Button>
+          ) : null}
         </Stack>
         <Stack sx={{ gap: 2 }}>
           <Stack
