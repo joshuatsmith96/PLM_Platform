@@ -2,7 +2,7 @@ type User = {
   firstName: string;
   lastName: string;
   imgUrl: string | null;
-  role?: "CSCSAdmin";
+  role?: "CSCSAdmin" | "ReadOnly";
 };
 
 export const User: User = {

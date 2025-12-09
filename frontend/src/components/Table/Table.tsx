@@ -21,6 +21,7 @@ import { Search, Add } from "@mui/icons-material";
 import useProjects from "../../hooks/useProjects";
 import TRow from "./Parts/TRow";
 import TableColumns from "./Parts/TableColumns";
+import { User } from "../../dummyUser";
 
 export default function OverviewTable() {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -81,27 +82,29 @@ export default function OverviewTable() {
         <Typography variant="h5" sx={{ fontWeight: 600, color: "#333" }}>
           Projects Overview
         </Typography>
-        <Button
-          variant="contained"
-          startIcon={<Add />}
-          sx={{
-            bgcolor: "#2196f3",
-            textTransform: "none",
-            borderRadius: 2,
-            px: 3,
-            "&:hover": { bgcolor: "#1976d2" },
-            width: {
-              xs: "100%",
-              md: "300px",
-            },
-            mt: {
-              xs: 5,
-              lg: 0,
-            },
-          }}
-        >
-          Add New Project
-        </Button>
+        {User.role != "ReadOnly" ? (
+          <Button
+            variant="contained"
+            startIcon={<Add />}
+            sx={{
+              bgcolor: "#2196f3",
+              textTransform: "none",
+              borderRadius: 2,
+              px: 3,
+              "&:hover": { bgcolor: "#1976d2" },
+              width: {
+                xs: "100%",
+                md: "300px",
+              },
+              mt: {
+                xs: 5,
+                lg: 0,
+              },
+            }}
+          >
+            Add New Project
+          </Button>
+        ) : null}
       </Box>
 
       <Stack
