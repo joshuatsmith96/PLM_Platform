@@ -36,10 +36,10 @@ const TRow = ({ project, index }: TRowType) => {
       </TableCell>
       <TableCell>
         <Chip
-          label={project.project_critical_status}
+          label={project.project_lifecycle_type}
           size="small"
           sx={{
-            ...getChipColor("Deleting Item"),
+            ...getChipColor(project.project_lifecycle_type),
             fontWeight: 500,
             borderRadius: 2,
           }}

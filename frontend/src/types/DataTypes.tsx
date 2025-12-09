@@ -3,6 +3,7 @@ export type Project = {
   project_name: string;
   project_creation_date: string;
   project_team_lead: string | null;
+  project_lifecycle_type: string;
   current_stage_name: string;
   project_critical_status: string | null;
   project_next_required_action: string | null;
