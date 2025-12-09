@@ -1,17 +1,60 @@
 import useGetProjectById from "../hooks/useGetProjectById";
 import Section from "../components/Section";
-import { Stack, Typography, Button, Box, Tooltip } from "@mui/material";
+import {
+  Stack,
+  Typography,
+  Button,
+  Box,
+  Tooltip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import DetailSection from "../components/DetailSection";
+import useDeleteProject from "../hooks/useDeleteProject";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 const ProjectDetails = () => {
   const { id } = useParams();
   const { project } = useGetProjectById(id);
+  const { deleteProject } = useDeleteProject();
+  const [openConfirm, setOpenConfirm] = useState(false);
+
+  const handleOpenConfirm = () => setOpenConfirm(true);
+  const handleCloseConfirm = () => setOpenConfirm(false);
+
+  const handleConfirmDelete = async () => {
+    await deleteProject(id);
+    setOpenConfirm(false);
+    window.location.href = "/";
+  };
 
   return (
     <Stack>
+      <Dialog open={openConfirm} onClose={handleCloseConfirm}>
+        <DialogTitle>Delete Project?</DialogTitle>
+        <DialogContent>
+          Are you sure you want to delete this project? This action cannot be
+          undone.
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseConfirm} variant="outlined">
+            No
+          </Button>
+          <Button
+            onClick={handleConfirmDelete}
+            variant="contained"
+            color="error"
+          >
+            Yes, Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Section>
         <Stack
           sx={{
@@ -36,14 +79,13 @@ const ProjectDetails = () => {
           </Button>
           <Button
             variant="contained"
+            onClick={handleOpenConfirm}
             sx={{
               fontSize: 12,
               width: "fit-content",
               gap: 2,
               bgcolor: "rgba(227, 45, 0, 1)",
             }}
-            LinkComponent={"a"}
-            href="/"
           >
             <Tooltip title="Delete Project">
               <DeleteOutlineIcon />
