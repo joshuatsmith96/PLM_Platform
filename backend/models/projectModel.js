@@ -6,6 +6,7 @@ SELECT
     p.project_name, 
     p.project_creation_date, 
     p.project_team_lead,
+    p.project_lifecycle_type,
     sm.stage_name AS current_stage_name, 
     p.project_critical_status,
     p.project_next_required_action,
@@ -85,7 +86,7 @@ const createProject = async (projectData) => {
   const stageDetailText = `
     INSERT INTO STAGE_DETAILS (
       stage_detail_id, project_id, stage_id, project_stage_status, 
-      project_stage_notes, project_stage_attachment_links, timestamp
+      project_stage_notes, project_stage_attachment_link, timestamp
     )
     VALUES ($1, $2, $3, $4, $5, $6, NOW())
     RETURNING *;
