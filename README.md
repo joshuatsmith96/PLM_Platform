@@ -38,10 +38,11 @@ Defines the standard project lifecycle stages.
 | sequence_order | INTEGER | NOT NULL | Numeric sort order (10, 20, 30...) |
 
 **Default Stages:**
-- `S01_INIT` - Initiation & Planning
-- `S02_EXEC` - Execution & Development
-- `S03_TEST` - Testing & Review
-- `S04_CLOS` - Closing & Handover
+- `S01_INIT` - Initiation/Planning
+- `S02_BUILD` - Execution/Development
+- `S03_TEST` - Testing/Quality Assurance
+- `S04_DEPLOY` - Deployment/Launch
+- `S05_CLOSE` - Closeout/Review
 
 ### PROJECT
 Core project information and current status.
