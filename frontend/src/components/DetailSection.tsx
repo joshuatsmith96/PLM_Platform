@@ -18,6 +18,7 @@ import useUpdateProject from "../hooks/useUpdateProject";
 import { User } from "../dummyUser";
 
 interface DetailSectionProps extends DetailSectionType {
+  editable?: boolean;
   projectId: string | undefined;
   onUpdate?: () => void;
 }
@@ -55,6 +56,7 @@ const DetailSection = ({
   data,
   projectId,
   onUpdate,
+  editable,
 }: DetailSectionProps) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState<Record<string, string>>({});
@@ -79,9 +81,6 @@ const DetailSection = ({
   };
 
   const handleSubmit = async () => {
-    console.log("handleSubmit called");
-    console.log("projectId:", projectId);
-
     if (!projectId) {
       console.error("Project ID is required");
       return;
@@ -104,9 +103,6 @@ const DetailSection = ({
 
       mappedData[dbFieldName] = value;
     });
-
-    console.log("Form data:", formData);
-    console.log("Mapped data:", mappedData);
 
     try {
       console.log("Calling updateProject...");
@@ -131,7 +127,7 @@ const DetailSection = ({
           sx={{ display: "flex", alignItems: "center", gap: 2, mb: 5 }}
         >
           <strong>{title}</strong>
-          {User.role === "CSCSAdmin" && (
+          {editable && User.role === "CSCSAdmin" && (
             <EditIcon
               sx={{ cursor: "pointer", color: "#2196f3" }}
               onClick={handleOpen}
