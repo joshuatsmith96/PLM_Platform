@@ -21,6 +21,6 @@ export type DetailEntryType = {
 };
 
 export type DetailSectionType = {
-  title: string;
+  title: string | null | undefined;
   data: DetailEntryType[];
 };

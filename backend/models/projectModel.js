@@ -118,6 +118,100 @@ const createProject = async (projectData) => {
   }
 };
 
+const updateProject = async (projectId, updateData) => {
+  const {
+    project_name,
+    project_team_lead,
+    project_lead_department,
+    project_poc_email,
+    project_poc_phone,
+    project_current_stage,
+    project_critical_status,
+    project_lifecycle_type,
+    project_next_required_action,
+  } = updateData;
+
+  // Build dynamic update query based on provided fields
+  const updates = [];
+  const values = [];
+  let paramCount = 1;
+
+  if (project_name !== undefined) {
+    updates.push(`project_name = $${paramCount}`);
+    values.push(project_name);
+    paramCount++;
+  }
+
+  if (project_team_lead !== undefined) {
+    updates.push(`project_team_lead = $${paramCount}`);
+    values.push(project_team_lead);
+    paramCount++;
+  }
+
+  if (project_lead_department !== undefined) {
+    updates.push(`project_lead_department = $${paramCount}`);
+    values.push(project_lead_department);
+    paramCount++;
+  }
+
+  if (project_poc_email !== undefined) {
+    updates.push(`project_poc_email = $${paramCount}`);
+    values.push(project_poc_email);
+    paramCount++;
+  }
+
+  if (project_poc_phone !== undefined) {
+    updates.push(`project_poc_phone = $${paramCount}`);
+    values.push(project_poc_phone);
+    paramCount++;
+  }
+
+  if (project_current_stage !== undefined) {
+    updates.push(`project_current_stage = $${paramCount}`);
+    values.push(project_current_stage);
+    paramCount++;
+  }
+
+  if (project_critical_status !== undefined) {
+    updates.push(`project_critical_status = $${paramCount}`);
+    values.push(project_critical_status);
+    paramCount++;
+  }
+
+  if (project_lifecycle_type !== undefined) {
+    updates.push(`project_lifecycle_type = $${paramCount}`);
+    values.push(project_lifecycle_type);
+    paramCount++;
+  }
+
+  if (project_next_required_action !== undefined) {
+    updates.push(`project_next_required_action = $${paramCount}`);
+    values.push(project_next_required_action);
+    paramCount++;
+  }
+
+  if (updates.length === 0) {
+    throw new Error("No fields provided for update");
+  }
+
+  values.push(projectId);
+
+  const text = `
+    UPDATE PROJECT
+    SET ${updates.join(", ")}
+    WHERE project_id = $${paramCount}
+    RETURNING *;
+  `;
+
+  try {
+    const result = await db.query(text, values);
+    return result.rows[0];
+  } catch (error) {
+    console.error("Error updating project:", error);
+    throw new Error("Could not update project.");
+  }
+};
+
 const deleteProject = async (projectId) => {
   try {
     const deleteDetailsText = `
@@ -143,5 +237,6 @@ module.exports = {
   getAllProjects,
   getProjectById,
   createProject,
+  updateProject,
   deleteProject,
 };

@@ -21,7 +21,7 @@ import { User } from "../dummyUser";
 
 const ProjectDetails = () => {
   const { id } = useParams();
-  const { project } = useGetProjectById(id);
+  const { project, refetch } = useGetProjectById(id);
   const { deleteProject } = useDeleteProject();
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -144,6 +144,7 @@ const ProjectDetails = () => {
       </Section>
       <Section>
         <DetailSection
+          projectId={id}
           title="Project Details"
           data={[
             { title: "Project ID", text: project?.project_id },
@@ -161,6 +162,7 @@ const ProjectDetails = () => {
             { title: "Contact Email", text: project?.project_poc_email },
             { title: "Contact Phone", text: project?.project_poc_phone },
           ]}
+          onUpdate={refetch}
         />
       </Section>
       <Section>
@@ -176,6 +178,7 @@ const ProjectDetails = () => {
         >
           <Stack sx={{ gap: 5 }}>
             <DetailSection
+              projectId={id}
               title="Supplier Details"
               data={[
                 { title: "Company", text: "Supplier A" },
@@ -191,6 +194,7 @@ const ProjectDetails = () => {
           </Stack>
           <Stack sx={{ gap: 5 }}>
             <DetailSection
+              projectId={id}
               title="Distributor Details"
               data={[
                 { title: "Company", text: "Distributor A" },
