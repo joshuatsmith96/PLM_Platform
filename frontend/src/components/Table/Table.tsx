@@ -4,9 +4,6 @@ import {
   Button,
   TextField,
   InputAdornment,
-  Select,
-  MenuItem,
-  FormControl,
   Typography,
   Table,
   TableBody,
@@ -29,8 +26,6 @@ import { User } from "../../dummyUser";
 
 export default function OverviewTable() {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [criticalStatusFilter, setCriticalStatusFilter] = useState<string>("");
-  const [lifecycleFilter, setLifecycleFilter] = useState<string>("");
 
   const { projects, loading, error, refetch } = useProjects();
 
