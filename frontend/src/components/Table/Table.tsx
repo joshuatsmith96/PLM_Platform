@@ -194,41 +194,6 @@ export default function OverviewTable() {
           }}
           size="small"
         />
-        <FormControl
-          sx={{ minWidth: 200, bgcolor: "white", borderRadius: 1 }}
-          size="small"
-        >
-          <Select
-            value={criticalStatusFilter}
-            onChange={(e) => setCriticalStatusFilter(e.target.value)}
-            displayEmpty
-            sx={{
-              "& .MuiOutlinedInput-notchedOutline": { borderColor: "#e0e0e0" },
-            }}
-          >
-            <MenuItem value="">Critical Status</MenuItem>
-            <MenuItem value="new">New Item</MenuItem>
-            <MenuItem value="transitioning">Transitioning Item</MenuItem>
-            <MenuItem value="deleting">Deleting Item</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl
-          sx={{ minWidth: 200, bgcolor: "white", borderRadius: 1 }}
-          size="small"
-        >
-          <Select
-            value={lifecycleFilter}
-            onChange={(e) => setLifecycleFilter(e.target.value)}
-            displayEmpty
-            sx={{
-              "& .MuiOutlinedInput-notchedOutline": { borderColor: "#e0e0e0" },
-            }}
-          >
-            <MenuItem value="">Lifecycle Type</MenuItem>
-            <MenuItem value="active">Active</MenuItem>
-            <MenuItem value="archived">Archived</MenuItem>
-          </Select>
-        </FormControl>
       </Stack>
 
       {/* Table */}
