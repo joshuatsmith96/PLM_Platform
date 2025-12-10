@@ -76,7 +76,37 @@ const updateStageDetail = async (req, res) => {
   }
 };
 
+const getStageDetailsByProjectId = async (req, res) => {
+  const projectId = req.params.projectId;
+
+  if (!projectId) {
+    return res.status(400).json({ message: "Missing project ID parameter." });
+  }
+
+  try {
+    const stageDetails = await stageModel.getStageDetailsByProjectId(projectId);
+
+    if (!stageDetails || stageDetails.length === 0) {
+      return res.status(404).json({
+        message: `No stage details found for project ID ${projectId}.`,
+      });
+    }
+
+    res.status(200).json({
+      message: "Stage details retrieved successfully",
+      data: stageDetails,
+    });
+  } catch (error) {
+    console.error("Error in getStageDetailsByProjectId:", error);
+    res.status(500).json({
+      message: "Failed to retrieve stage details.",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createStageDetail,
   updateStageDetail,
+  getStageDetailsByProjectId,
 };

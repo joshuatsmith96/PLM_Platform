@@ -91,7 +91,25 @@ const updateStageDetail = async (stageDetailId, updateData) => {
   }
 };
 
+const getStageDetailsByProjectId = async (projectId) => {
+  const text = `
+    SELECT *
+    FROM STAGE_DETAILS
+    WHERE project_id = $1
+    ORDER BY timestamp DESC;
+  `;
+
+  try {
+    const result = await db.query(text, [projectId]);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching stage details:", error);
+    throw new Error("Could not retrieve stage details for this project.");
+  }
+};
+
 module.exports = {
   createStageDetail,
   updateStageDetail,
+  getStageDetailsByProjectId,
 };
