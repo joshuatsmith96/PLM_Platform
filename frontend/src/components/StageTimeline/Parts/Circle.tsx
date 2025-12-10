@@ -13,7 +13,7 @@ const Circle = ({ circleType }: CircleType) => {
     case "Started":
       return <PanoramaFishEyeIcon />;
     case "NotStarted":
-      return <CheckCircleOutlineIcon />;
+      return <PanoramaFishEyeIcon />;
   }
 };
 

@@ -1,16 +1,28 @@
-import { Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import StageSelector from "./Parts/StageSelector";
 import StageDetails from "./Parts/StageDetails";
 
-type StageTimelineType = {
-  id: string;
-};
-
-const StageTimeline = ({ id }: StageTimelineType) => {
+const StageTimeline = () => {
   return (
     <Stack>
-      <StageSelector id={id} />
-      <StageDetails />
+      <Typography
+        variant="h6"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 2,
+          mb: 5,
+          fontWeight: "bold",
+        }}
+      >
+        Stage Timeline
+      </Typography>
+      <Stack>
+        <Box sx={{ overflowX: "auto" }}>
+          <StageSelector />
+        </Box>
+        <StageDetails />
+      </Stack>
     </Stack>
   );
 };

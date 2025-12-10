@@ -23,6 +23,7 @@ const StageOption = ({ status, stage }: StageOptionType) => {
         alignItems: "center",
         gap: 1,
         color: statusColor,
+        py: 2,
       }}
     >
       <Circle circleType={status} />
