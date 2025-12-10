@@ -4,7 +4,7 @@ import type { StatusTypes } from "../../../types/DataTypes";
 
 type StageOptionType = {
   status: StatusTypes;
-  id: string;
+  stage: string;
 };
 
 const statusColors: Record<StatusTypes, string> = {
@@ -13,9 +13,8 @@ const statusColors: Record<StatusTypes, string> = {
   Started: "#2BAAFF",
 };
 
-const StageOption = ({ status }: StageOptionType) => {
+const StageOption = ({ status, stage }: StageOptionType) => {
   const statusColor = statusColors[status];
-  console.log(status);
 
   return (
     <Stack
@@ -27,7 +26,7 @@ const StageOption = ({ status }: StageOptionType) => {
       }}
     >
       <Circle circleType={status} />
-      <Typography>Test</Typography>
+      <Typography>{stage}</Typography>
     </Stack>
   );
 };
