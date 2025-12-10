@@ -24,3 +24,5 @@ export type DetailSectionType = {
   title: string | null | undefined;
   data: DetailEntryType[];
 };
+
+export type StatusTypes = "Complete" | "Started" | "NotStarted";
