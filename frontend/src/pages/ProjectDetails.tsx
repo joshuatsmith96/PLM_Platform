@@ -21,7 +21,7 @@ import { User } from "../dummyUser";
 
 const ProjectDetails = () => {
   const { id } = useParams();
-  const { project } = useGetProjectById(id);
+  const { project, refetch } = useGetProjectById(id);
   const { deleteProject } = useDeleteProject();
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -162,6 +162,7 @@ const ProjectDetails = () => {
             { title: "Contact Email", text: project?.project_poc_email },
             { title: "Contact Phone", text: project?.project_poc_phone },
           ]}
+          onUpdate={refetch}
         />
       </Section>
       <Section>
