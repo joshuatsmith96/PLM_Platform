@@ -37,10 +37,14 @@ const ProjectDetails = () => {
   return (
     <Stack>
       <Dialog open={openConfirm} onClose={handleCloseConfirm}>
-        <DialogTitle>Delete Project?</DialogTitle>
+        <DialogTitle>
+          <Typography sx={{ fontWeight: "bold" }}>Delete Project?</Typography>
+        </DialogTitle>
         <DialogContent>
-          Are you sure you want to delete this project? This action cannot be
-          undone.
+          <Typography>
+            Are you sure you want to delete this project? This action cannot be
+            undone.
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseConfirm} variant="outlined">
