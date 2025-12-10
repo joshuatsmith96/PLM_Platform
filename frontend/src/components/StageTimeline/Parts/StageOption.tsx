@@ -21,9 +21,17 @@ const StageOption = ({ status, stage }: StageOptionType) => {
       sx={{
         flexDirection: "row",
         alignItems: "center",
+        justifyContent: {
+          xs: "center",
+          lg: "start",
+        },
         gap: 1,
         color: statusColor,
         py: 2,
+        width: {
+          xs: "250px",
+          lg: "350px",
+        },
       }}
     >
       <Circle circleType={status} />

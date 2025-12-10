@@ -17,8 +17,23 @@ const StageTimeline = () => {
       >
         Stage Timeline
       </Typography>
-      <Stack>
-        <Box sx={{ overflowX: "auto" }}>
+      <Stack
+        sx={{
+          flexDirection: {
+            xs: "column",
+            lg: "row",
+          },
+          gap: 4,
+        }}
+      >
+        <Box
+          sx={{
+            overflowX: {
+              xs: "auto",
+              lg: "hidden",
+            },
+          }}
+        >
           <StageSelector />
         </Box>
         <StageDetails />

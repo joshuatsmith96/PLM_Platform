@@ -64,12 +64,8 @@ const StageSelector = () => {
               <Box
                 sx={{
                   pl: {
-                    xs: 3,
+                    xs: 0,
                     lg: 1.2,
-                  },
-                  pr: {
-                    xs: 3,
-                    lg: 0,
                   },
                 }}
               >
