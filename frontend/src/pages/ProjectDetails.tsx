@@ -144,6 +144,7 @@ const ProjectDetails = () => {
       </Section>
       <Section>
         <DetailSection
+          projectId={id}
           title="Project Details"
           data={[
             { title: "Project ID", text: project?.project_id },
@@ -176,6 +177,7 @@ const ProjectDetails = () => {
         >
           <Stack sx={{ gap: 5 }}>
             <DetailSection
+              projectId={id}
               title="Supplier Details"
               data={[
                 { title: "Company", text: "Supplier A" },
@@ -191,6 +193,7 @@ const ProjectDetails = () => {
           </Stack>
           <Stack sx={{ gap: 5 }}>
             <DetailSection
+              projectId={id}
               title="Distributor Details"
               data={[
                 { title: "Company", text: "Distributor A" },
