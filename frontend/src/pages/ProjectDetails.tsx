@@ -145,6 +145,7 @@ const ProjectDetails = () => {
       <Section>
         <DetailSection
           projectId={id}
+          editable
           title="Project Details"
           data={[
             { title: "Project ID", text: project?.project_id },
