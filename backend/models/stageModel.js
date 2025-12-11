@@ -93,10 +93,14 @@ const updateStageDetail = async (stageDetailId, updateData) => {
 
 const getStageDetailsByProjectId = async (projectId) => {
   const text = `
-    SELECT *
-    FROM STAGE_DETAILS
-    WHERE project_id = $1
-    ORDER BY timestamp DESC;
+    SELECT 
+      sd.*,
+      sm.stage_name,
+      sm.sequence_order
+    FROM STAGE_DETAILS sd
+    INNER JOIN STAGE_MASTER sm ON sd.stage_id = sm.stage_id
+    WHERE sd.project_id = $1
+    ORDER BY sm.sequence_order ASC;
   `;
 
   try {
