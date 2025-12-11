@@ -18,6 +18,7 @@ import useDeleteProject from "../hooks/useDeleteProject";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { User } from "../dummyUser";
+import StageTimeline from "../components/StageTimeline/StageTimeline";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -214,6 +215,9 @@ const ProjectDetails = () => {
             />
           </Stack>
         </Stack>
+      </Section>
+      <Section>
+        <StageTimeline projectId={id} />
       </Section>
     </Stack>
   );

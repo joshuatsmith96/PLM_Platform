@@ -1,0 +1,44 @@
+import Circle from "./Circle";
+import { Stack, Typography } from "@mui/material";
+import type { StatusTypes } from "../../../types/DataTypes";
+
+type StageOptionType = {
+  status: StatusTypes;
+  stage: string;
+  projectId: string | undefined;
+};
+
+const statusColors: Record<StatusTypes, string> = {
+  Complete: "#00CA3D",
+  NotStarted: "#A0A0A0",
+  Started: "#2BAAFF",
+};
+
+const StageOption = ({ status, stage }: StageOptionType) => {
+  const statusColor = statusColors[status];
+
+  return (
+    <Stack
+      sx={{
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: {
+          xs: "center",
+          lg: "start",
+        },
+        gap: 1,
+        color: statusColor,
+        py: 2,
+        width: {
+          xs: "250px",
+          lg: "350px",
+        },
+      }}
+    >
+      <Circle circleType={status} />
+      <Typography>{stage}</Typography>
+    </Stack>
+  );
+};
+
+export default StageOption;
