@@ -1,7 +1,5 @@
 import { Box, Stack } from "@mui/material";
 import StageOption from "./StageOption";
-import useStageDetails from "../../../hooks/useStageDetails";
-import useStageMaster from "../../../hooks/useStageMaster";
 import type {
   StageDetailType,
   Stages,
@@ -10,6 +8,8 @@ import type {
 
 type StageTimelineType = {
   projectId: string | undefined;
+  stageDetails: StageDetailType[];
+  stages: Stages[];
 };
 
 type FinalStageDetailsType = {
@@ -18,10 +18,11 @@ type FinalStageDetailsType = {
   status: StatusTypes;
 };
 
-const StageSelector = ({ projectId }: StageTimelineType) => {
-  const { stageDetails } = useStageDetails(projectId);
-  const { stages } = useStageMaster();
-
+const StageSelector = ({
+  projectId,
+  stageDetails,
+  stages,
+}: StageTimelineType) => {
   const Details: StageDetailType[] = stageDetails;
   const Stages: Stages[] = stages;
 

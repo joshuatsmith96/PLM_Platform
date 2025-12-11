@@ -9,5 +9,5 @@ export const User: User = {
   firstName: "Joshua",
   lastName: "Smith",
   imgUrl: null,
-  role: "CSCSAdmin",
+  role: "ReadOnly",
 };

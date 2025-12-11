@@ -1,12 +1,19 @@
 import { Box, Stack, Typography } from "@mui/material";
 import StageSelector from "./Parts/StageSelector";
 import StageDetails from "./Parts/StageDetails";
+import useStageDetails from "../../hooks/useStageDetails";
+import useStageMaster from "../../hooks/useStageMaster";
+import type { Stages } from "../../types/DataTypes";
 
 type StageTimelineType = {
   projectId: string | undefined;
 };
 
 const StageTimeline = ({ projectId }: StageTimelineType) => {
+  const { stageDetails } = useStageDetails(projectId);
+  const { stages } = useStageMaster();
+  const Stages: Stages[] = stages;
+
   return (
     <Stack>
       <Typography
@@ -38,9 +45,13 @@ const StageTimeline = ({ projectId }: StageTimelineType) => {
             },
           }}
         >
-          <StageSelector projectId={projectId} />
+          <StageSelector
+            stageDetails={stageDetails}
+            stages={stages}
+            projectId={projectId}
+          />
         </Box>
-        <StageDetails />
+        <StageDetails stageDetails={stageDetails} stages={Stages} />
       </Stack>
     </Stack>
   );
