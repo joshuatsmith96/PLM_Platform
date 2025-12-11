@@ -5,6 +5,7 @@ import type { StatusTypes } from "../../../types/DataTypes";
 type StageOptionType = {
   status: StatusTypes;
   stage: string;
+  projectId: string | undefined;
 };
 
 const statusColors: Record<StatusTypes, string> = {

@@ -26,3 +26,19 @@ export type DetailSectionType = {
 };
 
 export type StatusTypes = "Complete" | "Started" | "NotStarted";
+
+export type Stages = {
+  stage_id: string;
+  stage_name: string;
+  sequence_order: number;
+};
+
+export type StageDetailType = {
+  stage_detail_id: string;
+  project_id: string;
+  stage_id: string;
+  project_stage_status: StatusTypes;
+  timestamp: string;
+  project_stage_notes: string;
+  project_stage_attachment_links: string[];
+};

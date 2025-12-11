@@ -29,8 +29,6 @@ const ProjectDetails = () => {
   const handleOpenConfirm = () => setOpenConfirm(true);
   const handleCloseConfirm = () => setOpenConfirm(false);
 
-  console.log(project);
-
   const handleConfirmDelete = async () => {
     await deleteProject(id);
     setOpenConfirm(false);
@@ -219,7 +217,7 @@ const ProjectDetails = () => {
         </Stack>
       </Section>
       <Section>
-        <StageTimeline />
+        <StageTimeline projectId={id} />
       </Section>
     </Stack>
   );

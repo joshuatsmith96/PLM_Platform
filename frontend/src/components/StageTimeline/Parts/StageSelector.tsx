@@ -1,36 +1,51 @@
 import { Box, Stack } from "@mui/material";
 import StageOption from "./StageOption";
+import useStageDetails from "../../../hooks/useStageDetails";
+import useStageMaster from "../../../hooks/useStageMaster";
+import type {
+  StageDetailType,
+  Stages,
+  StatusTypes,
+} from "../../../types/DataTypes";
 
-const StageSelector = () => {
-  const DEFAULT_STAGES = [
-    {
-      stage_id: "S01_INIT",
-      stage_name: "Initiation/Planning",
-      sequence_order: 10,
-    },
-    {
-      stage_id: "S02_BUILD",
-      stage_name: "Execution/Development",
-      sequence_order: 20,
-    },
-    {
-      stage_id: "S03_TEST",
-      stage_name: "Testing/Quality Assurance",
-      sequence_order: 30,
-    },
-    {
-      stage_id: "S04_DEPLOY",
-      stage_name: "Deployment/Launch",
-      sequence_order: 40,
-    },
-    {
-      stage_id: "S05_CLOSE",
-      stage_name: "Closeout/Review",
-      sequence_order: 50,
-    },
-  ];
+type StageTimelineType = {
+  projectId: string | undefined;
+};
 
-  console.log(DEFAULT_STAGES);
+type FinalStageDetailsType = {
+  stage_name: string;
+  stage_id: string;
+  status: StatusTypes;
+};
+
+const StageSelector = ({ projectId }: StageTimelineType) => {
+  const { stageDetails } = useStageDetails(projectId);
+  const { stages } = useStageMaster();
+
+  const Details: StageDetailType[] = stageDetails;
+  const Stages: Stages[] = stages;
+
+  const finalStageDetails: FinalStageDetailsType[] = [];
+
+  Stages.map((stage) => {
+    const pushToDetails: FinalStageDetailsType = {
+      stage_name: "",
+      stage_id: "",
+      status: "NotStarted",
+    };
+
+    for (let i = 0; i <= stages.length; i++) {
+      if (stageDetails[i] && Details[i].stage_id === stage.stage_id) {
+        pushToDetails.stage_id = Details[i].stage_detail_id;
+        pushToDetails.status = Details[i].project_stage_status;
+      } else {
+        pushToDetails.stage_id = stage.stage_id;
+      }
+      pushToDetails.stage_name = stage.stage_name;
+    }
+
+    finalStageDetails.push(pushToDetails);
+  });
 
   return (
     <Stack
@@ -45,8 +60,9 @@ const StageSelector = () => {
         },
       }}
     >
-      {DEFAULT_STAGES.map((stage, index) => {
-        if (index != DEFAULT_STAGES.length - 1) {
+      {finalStageDetails.map((stage, index) => {
+        console.log(stage);
+        if (index != stages.length - 1) {
           return (
             <Stack
               sx={{
@@ -60,7 +76,11 @@ const StageSelector = () => {
                 },
               }}
             >
-              <StageOption stage={stage.stage_name} status="NotStarted" />
+              <StageOption
+                projectId={projectId}
+                stage={stage.stage_name}
+                status={stage.status}
+              />
               <Box
                 sx={{
                   pl: {
@@ -89,7 +109,11 @@ const StageSelector = () => {
         } else {
           return (
             <Stack direction="column" alignItems="start">
-              <StageOption stage={stage.stage_name} status="NotStarted" />
+              <StageOption
+                projectId={projectId}
+                stage={stage.stage_name}
+                status={stage.status}
+              />
             </Stack>
           );
         }

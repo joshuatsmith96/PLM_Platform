@@ -13,7 +13,6 @@ const useProjects = (): UseProjectsReturn => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const url = import.meta.env.VITE_API_URL;
-  console.log(url);
 
   const fetchProjects = async (): Promise<void> => {
     setLoading(true);

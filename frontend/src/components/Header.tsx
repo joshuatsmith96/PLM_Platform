@@ -4,7 +4,6 @@ import Tooltip from "@mui/material/Tooltip";
 import { User } from "../dummyUser";
 
 const Header = () => {
-  console.log(User);
   return (
     <Stack
       sx={{

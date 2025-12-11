@@ -2,7 +2,11 @@ import { Box, Stack, Typography } from "@mui/material";
 import StageSelector from "./Parts/StageSelector";
 import StageDetails from "./Parts/StageDetails";
 
-const StageTimeline = () => {
+type StageTimelineType = {
+  projectId: string | undefined;
+};
+
+const StageTimeline = ({ projectId }: StageTimelineType) => {
   return (
     <Stack>
       <Typography
@@ -34,7 +38,7 @@ const StageTimeline = () => {
             },
           }}
         >
-          <StageSelector />
+          <StageSelector projectId={projectId} />
         </Box>
         <StageDetails />
       </Stack>

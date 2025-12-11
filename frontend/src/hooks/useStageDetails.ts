@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function useStageDetails(projectId: string) {
+export default function useStageDetails(projectId: string | undefined) {
   const [stageDetails, setStageDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
