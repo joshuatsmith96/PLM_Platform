@@ -47,6 +47,14 @@ const getProjectById = async (projectId) => {
   }
 };
 
+const STAGES = [
+  { stage_id: "S01_INIT", sequence_order: 10 },
+  { stage_id: "S02_BUILD", sequence_order: 20 },
+  { stage_id: "S03_TEST", sequence_order: 30 },
+  { stage_id: "S04_DEPLOY", sequence_order: 40 },
+  { stage_id: "S05_CLOSE", sequence_order: 50 },
+];
+
 const createProject = async (projectData) => {
   const {
     project_id,
@@ -86,28 +94,35 @@ const createProject = async (projectData) => {
     project_next_required_action,
   ];
 
-  const stageDetailText = `
-    INSERT INTO STAGE_DETAILS (
-      stage_detail_id, project_id, stage_id, project_stage_status, 
-      project_stage_notes, project_stage_attachment_links, timestamp
-    )
-    VALUES ($1, $2, $3, $4, $5, $6, NOW())
-    RETURNING *;
-  `;
-
-  const stageDetailValues = [
-    `${project_id}_S01`,
-    project_id,
-    project_current_stage,
-    "Started",
-    null,
-    [],
-  ];
-
   try {
+    // Insert project
     const projectResult = await db.query(projectText, projectValues);
 
-    await db.query(stageDetailText, stageDetailValues);
+    // Insert ALL stages for this project
+    const stageDetailText = `
+      INSERT INTO STAGE_DETAILS (
+        stage_detail_id, project_id, stage_id, project_stage_status, 
+        project_stage_notes, project_stage_attachment_links, timestamp
+      )
+      VALUES ($1, $2, $3, $4, $5, $6, NOW());
+    `;
+
+    const stageInsertPromises = STAGES.map((stage) => {
+      const status = stage.stage_id === "S01_INIT" ? "Started" : "Not Started";
+
+      const values = [
+        `${project_id}_${stage.stage_id.replace("S", "S")}`, // e.g. P1_S02_BUILD
+        project_id,
+        stage.stage_id,
+        status,
+        null,
+        [],
+      ];
+
+      return db.query(stageDetailText, values);
+    });
+
+    await Promise.all(stageInsertPromises);
 
     return projectResult.rows[0];
   } catch (error) {
