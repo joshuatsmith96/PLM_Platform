@@ -297,40 +297,6 @@ Frontend uses a custom `useProjects` hook that:
 - Provides a `refetch` function for manual data refresh
 - Returns pagination metadata
 
-## 📁 Project Structure
-
-```
-project-lifecycle-hub/
-├── backend/
-│   ├── config/
-│   │   └── db.js                 # Database connection
-│   ├── controllers/
-│   │   ├── projectController.js  # Project route handlers
-│   │   └── stageController.js    # Stage route handlers
-│   ├── models/
-│   │   ├── projectModel.js       # Project database queries
-│   │   └── stageModel.js         # Stage database queries
-│   ├── routes/
-│   │   ├── projectRoutes.js      # Project endpoints
-│   │   └── stageRoutes.js        # Stage endpoints
-│   ├── server.js                 # Express app entry point
-│   ├── .env                      # Environment variables
-│   └── package.json
-│
-└── frontend/
-    ├── src/
-    │   ├── components/
-    │   │   └── OverviewTable/
-    │   │       ├── OverviewTable.tsx
-    │   │       └── Parts/
-    │   │           ├── TRow.tsx
-    │   │           └── TableColumns.tsx
-    │   ├── hooks/
-    │   │   └── useProjects.ts    # Custom data fetching hook
-    │   └── App.tsx
-    └── package.json
-```
-
 ## 🔧 Configuration
 
 ### Database Connection (db.js)
