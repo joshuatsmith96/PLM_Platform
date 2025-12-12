@@ -1,6 +1,7 @@
 import { Stack, Typography, TextField, Button } from "@mui/material";
 import type { StageDetailType, Stages } from "../../../types/DataTypes";
 import useUpdateStageDetail from "../../../hooks/useUpdateStage";
+import { useState } from "react";
 
 type StageDetailsType = {
   stageDetails: StageDetailType[];
@@ -14,6 +15,11 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
   const currentStage = stageDetails.find(
     (stage) => stage.project_stage_status === "Started"
   );
+
+  const [notes, setNotes] = useState<string>("");
+
+  const displayedNotes =
+    notes !== "" ? notes : currentStage?.project_stage_notes || "";
 
   if (!currentStage) {
     return <Typography>All Stages Complete</Typography>;
@@ -35,6 +41,10 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
     (detail) => detail.sequence_order === previousSequence
   );
 
+  const emptyAll = () => {
+    setNotes("");
+  };
+
   const nextStageButtonClick = async () => {
     try {
       await updateStageDetail(currentStage.stage_detail_id, {
@@ -44,6 +54,7 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
         project_stage_status: "Started",
       });
       refresh();
+      emptyAll();
     } catch (err) {
       console.error("Update failed:", err);
     }
@@ -58,9 +69,16 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
         project_stage_status: "Started",
       });
       refresh();
+      emptyAll();
     } catch (err) {
       console.error("Update failed:", err);
     }
+  };
+
+  const saveDetails = async () => {
+    await updateStageDetail(currentStage.stage_detail_id, {
+      project_stage_notes: notes,
+    });
   };
 
   return (
@@ -79,7 +97,8 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
         <TextField
           multiline
           minRows={10}
-          value={currentStage.project_stage_notes ?? ""}
+          value={displayedNotes}
+          onChange={(e) => setNotes(e.target.value)}
         />
       </Stack>
 
@@ -118,6 +137,7 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
             },
             fontSize: 12,
           }}
+          onClick={() => saveDetails()}
         >
           Save
         </Button>
@@ -126,6 +146,7 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
             variant="contained"
             sx={{ fontSize: 12 }}
             onClick={() => previousStageButtonClick()}
+            disabled={currentSequence === 10}
           >
             Go Back to Previous Stage
           </Button>
@@ -134,9 +155,8 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
             sx={{ fontSize: 12 }}
             color="success"
             onClick={() => nextStageButtonClick()}
-            disabled={nextSequence === 50}
           >
-            Move to Next Stage
+            {currentSequence === 50 ? "Complete Project" : "Move to Next Stage"}
           </Button>
         </Stack>
       </Stack>
