@@ -108,7 +108,7 @@ const createProject = async (projectData) => {
     `;
 
     const stageInsertPromises = STAGES.map((stage) => {
-      const status = stage.stage_id === "S01_INIT" ? "Started" : "Not Started";
+      const status = stage.stage_id === "S01_INIT" ? "Started" : "NotStarted";
 
       const values = [
         `${project_id}_${stage.stage_id.replace("S", "S")}`, // e.g. P1_S02_BUILD

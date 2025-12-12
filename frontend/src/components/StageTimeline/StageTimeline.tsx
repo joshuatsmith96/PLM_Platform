@@ -10,7 +10,7 @@ type StageTimelineType = {
 };
 
 const StageTimeline = ({ projectId }: StageTimelineType) => {
-  const { stageDetails } = useStageDetails(projectId);
+  const { stageDetails, refreshStageDetails } = useStageDetails(projectId);
   const { stages } = useStageMaster();
   const Stages: Stages[] = stages;
 
@@ -51,7 +51,11 @@ const StageTimeline = ({ projectId }: StageTimelineType) => {
             projectId={projectId}
           />
         </Box>
-        <StageDetails stageDetails={stageDetails} stages={Stages} />
+        <StageDetails
+          stageDetails={stageDetails}
+          stages={Stages}
+          refresh={refreshStageDetails}
+        />
       </Stack>
     </Stack>
   );
