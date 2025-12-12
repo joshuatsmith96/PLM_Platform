@@ -5,9 +5,10 @@ import useUpdateStageDetail from "../../../hooks/useUpdateStage";
 type StageDetailsType = {
   stageDetails: StageDetailType[];
   stages: Stages[];
+  refresh: () => void;
 };
 
-const StageDetails = ({ stageDetails, stages }: StageDetailsType) => {
+const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
   const { updateStageDetail } = useUpdateStageDetail();
 
   const currentStage = stageDetails.find(
@@ -15,7 +16,7 @@ const StageDetails = ({ stageDetails, stages }: StageDetailsType) => {
   );
 
   if (!currentStage) {
-    return <Typography>No stage started yet.</Typography>;
+    return <Typography>All Stages Complete</Typography>;
   }
 
   const stageName = stages.find(
@@ -23,19 +24,40 @@ const StageDetails = ({ stageDetails, stages }: StageDetailsType) => {
   )?.stage_name;
 
   const currentSequence = currentStage.sequence_order;
-  const previousSequence = currentStage.sequence_order
-    ? currentStage.sequence_order - 10
-    : 0;
-  const nextSequence = currentStage.sequence_order
-    ? currentStage.sequence_order + 10
-    : 0;
+  const previousSequence = currentSequence ? currentSequence - 10 : 0;
+  const nextSequence = currentSequence ? currentSequence + 10 : 0;
+
+  const nextStage = stageDetails.filter(
+    (detail) => detail.sequence_order === nextSequence
+  );
+
+  const previousStage = stageDetails.filter(
+    (detail) => detail.sequence_order === previousSequence
+  );
 
   const nextStageButtonClick = async () => {
     try {
-      await updateStageDetail(currentStage.project_id, {
+      await updateStageDetail(currentStage.stage_detail_id, {
         project_stage_status: "Complete",
       });
-      console.log("Update successful!");
+      await updateStageDetail(nextStage[0].stage_detail_id, {
+        project_stage_status: "Started",
+      });
+      refresh();
+    } catch (err) {
+      console.error("Update failed:", err);
+    }
+  };
+
+  const previousStageButtonClick = async () => {
+    try {
+      await updateStageDetail(currentStage.stage_detail_id, {
+        project_stage_status: "NotStarted",
+      });
+      await updateStageDetail(previousStage[0].stage_detail_id, {
+        project_stage_status: "Started",
+      });
+      refresh();
     } catch (err) {
       console.error("Update failed:", err);
     }
@@ -100,7 +122,11 @@ const StageDetails = ({ stageDetails, stages }: StageDetailsType) => {
           Save
         </Button>
         <Stack sx={{ flexDirection: { xs: "column", md: "row" }, gap: 2 }}>
-          <Button variant="contained" sx={{ fontSize: 12 }}>
+          <Button
+            variant="contained"
+            sx={{ fontSize: 12 }}
+            onClick={() => previousStageButtonClick()}
+          >
             Go Back to Previous Stage
           </Button>
           <Button
@@ -108,6 +134,7 @@ const StageDetails = ({ stageDetails, stages }: StageDetailsType) => {
             sx={{ fontSize: 12 }}
             color="success"
             onClick={() => nextStageButtonClick()}
+            disabled={nextSequence === 50}
           >
             Move to Next Stage
           </Button>

@@ -1,10 +1,7 @@
 import { useState } from "react";
+import type { StageDetailType } from "../types/DataTypes";
 
-interface UpdateStageDetailData {
-  project_stage_status?: string;
-  project_stage_notes?: string;
-  project_stage_attachment_links?: string[];
-}
+type UpdateStageDetailData = Partial<StageDetailType>;
 
 interface UseUpdateStageDetailReturn {
   updateStageDetail: (
@@ -18,15 +15,14 @@ interface UseUpdateStageDetailReturn {
 }
 
 const useUpdateStageDetail = (): UseUpdateStageDetailReturn => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<boolean>(false);
+  const [success, setSuccess] = useState(false);
 
   const updateStageDetail = async (
     stageDetailId: string,
     data: UpdateStageDetailData
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): Promise<any> => {
+  ) => {
     console.log("useUpdateStageDetail - stageDetailId:", stageDetailId);
     console.log("useUpdateStageDetail - data:", data);
 
@@ -49,10 +45,7 @@ const useUpdateStageDetail = (): UseUpdateStageDetailReturn => {
       console.log("Response status:", response.status);
 
       if (!response.ok) {
-        // Try to get the error message from the response
         const errorData = await response.json().catch(() => null);
-        console.log("Error response data:", errorData);
-
         const errorMessage =
           errorData?.error ||
           errorData?.message ||
@@ -65,8 +58,8 @@ const useUpdateStageDetail = (): UseUpdateStageDetailReturn => {
       setSuccess(true);
       return result.data;
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Unknown error";
-      setError(errorMessage);
+      const message = err instanceof Error ? err.message : "Unknown error";
+      setError(message);
       console.error("Error updating stage detail:", err);
       throw err;
     } finally {
