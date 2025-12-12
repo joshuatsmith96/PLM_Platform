@@ -3,6 +3,7 @@ import type { StageDetailType, Stages } from "../../../types/DataTypes";
 import useUpdateStageDetail from "../../../hooks/useUpdateStage";
 import { useState } from "react";
 import { User } from "../../../dummyUser";
+import Circle from "./Circle";
 
 type StageDetailsType = {
   stageDetails: StageDetailType[];
@@ -12,6 +13,8 @@ type StageDetailsType = {
 
 const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
   const { updateStageDetail } = useUpdateStageDetail();
+
+  const [saved, setSaved] = useState(false);
 
   const currentStage = stageDetails.find(
     (stage) => stage.project_stage_status === "Started"
@@ -44,6 +47,7 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
 
   const emptyAll = () => {
     setNotes("");
+    setSaved(false);
   };
 
   const nextStageButtonClick = async () => {
@@ -77,9 +81,14 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
   };
 
   const saveDetails = async () => {
-    await updateStageDetail(currentStage.stage_detail_id, {
-      project_stage_notes: notes,
-    });
+    try {
+      await updateStageDetail(currentStage.stage_detail_id, {
+        project_stage_notes: notes,
+      });
+      setSaved(true);
+    } catch (err) {
+      console.error("Save Failed:", err);
+    }
   };
 
   return (
@@ -129,19 +138,32 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
           gap: 2,
         }}
       >
-        <Button
-          variant="outlined"
-          sx={{
-            width: {
-              xs: "100%",
-              md: User.role === "CSCSAdmin" ? 200 : "100%",
-            },
-            fontSize: 12,
-          }}
-          onClick={() => saveDetails()}
-        >
-          Save
-        </Button>
+        <Stack sx={{ flexDirection: "row", alignItems: "center", gap: 2 }}>
+          <Button
+            variant="outlined"
+            sx={{
+              width: {
+                xs: "100%",
+                md: User.role === "CSCSAdmin" ? 200 : "100%",
+              },
+              fontSize: 12,
+            }}
+            onClick={() => saveDetails()}
+          >
+            Save
+          </Button>
+          {saved ? (
+            <Typography
+              color="success"
+              sx={{ display: "flex", alignItems: "center", gap: 1 }}
+            >
+              <Circle circleType="Complete" />
+              Saved
+            </Typography>
+          ) : (
+            ""
+          )}
+        </Stack>
         {User.role === "CSCSAdmin" ? (
           <Stack sx={{ flexDirection: { xs: "column", md: "row" }, gap: 2 }}>
             <Button
