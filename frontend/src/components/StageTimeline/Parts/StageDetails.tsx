@@ -2,6 +2,7 @@ import { Stack, Typography, TextField, Button } from "@mui/material";
 import type { StageDetailType, Stages } from "../../../types/DataTypes";
 import useUpdateStageDetail from "../../../hooks/useUpdateStage";
 import { useState } from "react";
+import { User } from "../../../dummyUser";
 
 type StageDetailsType = {
   stageDetails: StageDetailType[];
@@ -133,7 +134,7 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
           sx={{
             width: {
               xs: "100%",
-              md: 200,
+              md: User.role === "CSCSAdmin" ? 200 : "100%",
             },
             fontSize: 12,
           }}
@@ -141,24 +142,30 @@ const StageDetails = ({ stageDetails, stages, refresh }: StageDetailsType) => {
         >
           Save
         </Button>
-        <Stack sx={{ flexDirection: { xs: "column", md: "row" }, gap: 2 }}>
-          <Button
-            variant="contained"
-            sx={{ fontSize: 12 }}
-            onClick={() => previousStageButtonClick()}
-            disabled={currentSequence === 10}
-          >
-            Go Back to Previous Stage
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ fontSize: 12 }}
-            color="success"
-            onClick={() => nextStageButtonClick()}
-          >
-            {currentSequence === 50 ? "Complete Project" : "Move to Next Stage"}
-          </Button>
-        </Stack>
+        {User.role === "CSCSAdmin" ? (
+          <Stack sx={{ flexDirection: { xs: "column", md: "row" }, gap: 2 }}>
+            <Button
+              variant="contained"
+              sx={{ fontSize: 12 }}
+              onClick={() => previousStageButtonClick()}
+              disabled={currentSequence === 10}
+            >
+              Go Back to Previous Stage
+            </Button>
+            <Button
+              variant="contained"
+              sx={{ fontSize: 12 }}
+              color="success"
+              onClick={() => nextStageButtonClick()}
+            >
+              {currentSequence === 50
+                ? "Complete Project"
+                : "Move to Next Stage"}
+            </Button>
+          </Stack>
+        ) : (
+          ""
+        )}
       </Stack>
     </Stack>
   );
