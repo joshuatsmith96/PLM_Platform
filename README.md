@@ -60,6 +60,7 @@ Core project information and current status.
 | project_critical_status | VARCHAR(50) | | Health status |
 | project_lifecycle_type | VARCHAR(50) | | Project type |
 | project_next_required_action | TEXT | | Next immediate task |
+| sequence_order | INTEGER | NOT NULL | Numeric sort order (10, 20, 30...) |
 
 ### STAGE_DETAILS
 Historical record of stage transitions and notes.
@@ -73,6 +74,7 @@ Historical record of stage transitions and notes.
 | project_stage_notes | TEXT | | Detailed notes |
 | project_stage_attachment_links | TEXT[] | | Array of attachment URLs |
 | timestamp | TIMESTAMP WITH TIME ZONE | NOT NULL | Record creation time |
+| sequence_order | INTEGER | NOT NULL | Numeric sort order (10, 20, 30...) |
 
 ## 🚀 Getting Started
 
