@@ -154,6 +154,7 @@ const ProjectDetails = () => {
           title="Project Details"
           data={[
             { title: "Project ID", text: project?.project_id },
+            { title: "Project Name", text: project?.project_name },
             {
               title: "Next Required Action",
               text: project?.project_next_required_action,

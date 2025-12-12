@@ -88,7 +88,6 @@ const DetailSection = ({
 
     const mappedData: Record<string, string> = {};
     Object.keys(formData).forEach((displayTitle) => {
-      // Skip non-editable fields
       if (NON_EDITABLE_FIELDS.includes(displayTitle)) {
         return;
       }
@@ -96,7 +95,6 @@ const DetailSection = ({
       const dbFieldName = FIELD_MAPPING[displayTitle] || displayTitle;
       let value = formData[displayTitle];
 
-      // Convert stage name to stage ID if it's the Current Stage field
       if (displayTitle === "Current Stage" && value) {
         value = STAGE_NAME_TO_ID[value] || value;
       }
