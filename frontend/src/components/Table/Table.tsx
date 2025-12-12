@@ -3,14 +3,12 @@ import {
   Box,
   Button,
   TextField,
-  InputAdornment,
   Typography,
   Table,
   TableBody,
   TableContainer,
   TableHead,
   Paper,
-  Stack,
   CircularProgress,
   Alert,
   Dialog,
@@ -18,15 +16,13 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
-import { Search, Add } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import useProjects from "../../hooks/useProjects";
 import TRow from "./Parts/TRow";
 import TableColumns from "./Parts/TableColumns";
 import { User } from "../../dummyUser";
 
 export default function OverviewTable() {
-  const [searchTerm, setSearchTerm] = useState<string>("");
-
   const { projects, loading, error, refetch } = useProjects();
 
   // --- Dialog state ---
@@ -158,38 +154,6 @@ export default function OverviewTable() {
           </Button>
         )}
       </Box>
-
-      {/* Filters */}
-      <Stack
-        sx={{
-          flexDirection: { xs: "column", md: "row" },
-          gap: 2,
-          mb: 3,
-          justifyContent: "space-between",
-        }}
-      >
-        <TextField
-          placeholder="Search for project..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          sx={{
-            bgcolor: "white",
-            borderRadius: 1,
-            width: { xs: "100%", md: 300 },
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": { borderColor: "#e0e0e0" },
-            },
-          }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Search sx={{ color: "#999" }} />
-              </InputAdornment>
-            ),
-          }}
-          size="small"
-        />
-      </Stack>
 
       {/* Table */}
       <TableContainer
