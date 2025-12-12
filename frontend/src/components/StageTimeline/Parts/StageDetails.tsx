@@ -1,5 +1,6 @@
 import { Stack, Typography, TextField, Button } from "@mui/material";
 import type { StageDetailType, Stages } from "../../../types/DataTypes";
+import useUpdateStageDetail from "../../../hooks/useUpdateStage";
 
 type StageDetailsType = {
   stageDetails: StageDetailType[];
@@ -7,6 +8,8 @@ type StageDetailsType = {
 };
 
 const StageDetails = ({ stageDetails, stages }: StageDetailsType) => {
+  const { updateStageDetail } = useUpdateStageDetail();
+
   const currentStage = stageDetails.find(
     (stage) => stage.project_stage_status === "Started"
   );
@@ -18,6 +21,25 @@ const StageDetails = ({ stageDetails, stages }: StageDetailsType) => {
   const stageName = stages.find(
     (s) => s.stage_id === currentStage.stage_id
   )?.stage_name;
+
+  const currentSequence = currentStage.sequence_order;
+  const previousSequence = currentStage.sequence_order
+    ? currentStage.sequence_order - 10
+    : 0;
+  const nextSequence = currentStage.sequence_order
+    ? currentStage.sequence_order + 10
+    : 0;
+
+  const nextStageButtonClick = async () => {
+    try {
+      await updateStageDetail(currentStage.project_id, {
+        project_stage_status: "Complete",
+      });
+      console.log("Update successful!");
+    } catch (err) {
+      console.error("Update failed:", err);
+    }
+  };
 
   return (
     <Stack
@@ -81,7 +103,12 @@ const StageDetails = ({ stageDetails, stages }: StageDetailsType) => {
           <Button variant="contained" sx={{ fontSize: 12 }}>
             Go Back to Previous Stage
           </Button>
-          <Button variant="contained" sx={{ fontSize: 12 }} color="success">
+          <Button
+            variant="contained"
+            sx={{ fontSize: 12 }}
+            color="success"
+            onClick={() => nextStageButtonClick()}
+          >
             Move to Next Stage
           </Button>
         </Stack>

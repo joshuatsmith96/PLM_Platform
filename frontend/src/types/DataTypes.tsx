@@ -30,7 +30,7 @@ export type StatusTypes = "Complete" | "Started" | "NotStarted";
 export type Stages = {
   stage_id: string;
   stage_name: string;
-  sequence_order: number;
+  sequence_order: number | undefined;
 };
 
 export type StageDetailType = {
@@ -41,4 +41,5 @@ export type StageDetailType = {
   timestamp: string;
   project_stage_notes: string;
   project_stage_attachment_links: string[];
+  sequence_order: number | undefined;
 };
