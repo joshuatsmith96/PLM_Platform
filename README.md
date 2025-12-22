@@ -113,7 +113,7 @@ Once inside the repo, cd into both the `backend` and `frontend` folders, and ins
 
 5. **Initialize the database**
    
-   Run the following SQL to create tables:
+   This step assumes you have your database is setup, and your .env file is correct. Run the following SQL to create tables:
    ```sql
    -- Create STAGE_MASTER table
    CREATE TABLE STAGE_MASTER (
