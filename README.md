@@ -86,7 +86,7 @@ Historical record of stage transitions and notes.
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/joshuatsmith96/PLM_Platform.git
    ```
 
 2. **Install dependencies**
