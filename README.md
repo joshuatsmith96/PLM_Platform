@@ -101,16 +101,7 @@ Once inside the repo, cd into both the `backend` and `frontend` folders, and ins
    npm i
    ```
 
-4. **Configure environment variables**
-   Create a `.env` file in the 'backend' directory:
-   ```env
-   DBUSER="db_user_here"
-   HOST="localhost"
-   DATABASE="database_name"
-   DBPASSWORD="database_password"
-   ```
-
-5. **Initialize the database**
+4. **Initialize the database**
    
    This step assumes you have your database is setup, and your .env file is correct. Run the following SQL to create tables:
    ```sql
@@ -156,11 +147,26 @@ Once inside the repo, cd into both the `backend` and `frontend` folders, and ins
    );
    ```
 
-6. **Start the server**
+5. **Configure environment variables**
+   Create a `.env` file in the 'backend' directory:
+   ```env
+   DBUSER="db_user_here"
+   HOST="localhost"
+   DATABASE="database_name"
+   DBPASSWORD="database_password"
+   ```
+
+6. **Start the frontend and backend**
    ```bash
+   cd frontend
+   npm run dev
+   ```
+   Frontend runs on `http://localhost:5173`
+
+   ```bash
+   cd backend
    npm start
    ```
-   
    Server runs on `http://localhost:3000`
    
 ## 📡 API Endpoints
