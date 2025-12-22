@@ -102,7 +102,7 @@ Once inside the repo, cd into both the `backend` and `frontend` folders, and ins
    ```
 
 4. **Configure environment variables**
-   Create a `.env` file in the root directory:
+   Create a `.env` file in the 'backend' directory:
    ```env
    DBUSER=your_db_user
    HOST=localhost
@@ -122,13 +122,13 @@ Once inside the repo, cd into both the `backend` and `frontend` folders, and ins
      sequence_order INTEGER NOT NULL
    );
 
-   -- Insert default stages
-  INSERT INTO STAGE_MASTER (stage_id, stage_name, sequence_order) VALUES
-('S01_INIT', 'Initiation/Planning', 10),
-('S02_BUILD', 'Execution/Development', 20),
-('S03_TEST', 'Testing/Quality Assurance', 30),
-('S04_DEPLOY', 'Deployment/Launch', 40),
-('S05_CLOSE', 'Closeout/Review', 50);
+   -- Add default data to STAGE_MASTER
+   INSERT INTO STAGE_MASTER (stage_id, stage_name, sequence_order) VALUES
+   ('S01_INIT', 'Initiation/Planning', 10),
+   ('S02_BUILD', 'Execution/Development', 20),
+   ('S03_TEST', 'Testing/Quality Assurance', 30),
+   ('S04_DEPLOY', 'Deployment/Launch', 40),
+   ('S05_CLOSE', 'Closeout/Review', 50);
 
    -- Create PROJECT table
    CREATE TABLE PROJECT (
