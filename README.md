@@ -104,11 +104,10 @@ Once inside the repo, cd into both the `backend` and `frontend` folders, and ins
 4. **Configure environment variables**
    Create a `.env` file in the 'backend' directory:
    ```env
-   DBUSER=your_db_user
-   HOST=localhost
-   DATABASE=your_database_name
-   DBPASSWORD=your_db_password
-   PORT=3000
+   DBUSER="db_user_here"
+   HOST="localhost"
+   DATABASE="database_name"
+   DBPASSWORD="database_password"
    ```
 
 5. **Initialize the database**
