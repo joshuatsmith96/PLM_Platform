@@ -87,15 +87,21 @@ Historical record of stage transitions and notes.
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd project-lifecycle-hub
    ```
 
 2. **Install dependencies**
+Once inside the repo, cd into both the `backend` and `frontend` folders, and install all dependencies:
    ```bash
-   npm install
+   cd frontend
+   npm i
    ```
 
-3. **Configure environment variables**
+   ```bash
+   cd backend
+   npm i
+   ```
+
+4. **Configure environment variables**
    Create a `.env` file in the root directory:
    ```env
    DBUSER=your_db_user
@@ -105,7 +111,7 @@ Historical record of stage transitions and notes.
    PORT=3000
    ```
 
-4. **Initialize the database**
+5. **Initialize the database**
    
    Run the following SQL to create tables:
    ```sql
@@ -150,7 +156,7 @@ Historical record of stage transitions and notes.
    );
    ```
 
-5. **Start the server**
+6. **Start the server**
    ```bash
    npm start
    ```
