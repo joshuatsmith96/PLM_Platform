@@ -82,7 +82,7 @@ Historical record of stage transitions and notes.
 - PostgreSQL (v12 or higher)
 - npm or yarn
 
-### Backend Setup
+### GitHub Project Setup
 
 1. **Clone the repository**
    ```bash
@@ -163,24 +163,7 @@ Once inside the repo, cd into both the `backend` and `frontend` folders, and ins
    ```
    
    Server runs on `http://localhost:3000`
-
-### Frontend Setup
-
-1. **Navigate to frontend directory**
-   ```bash
-   cd frontend
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start development server**
-   ```bash
-   npm run dev
-   ```
-
+   
 ## 📡 API Endpoints
 
 ### Projects
